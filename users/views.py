@@ -2,7 +2,7 @@ from ninja import NinjaAPI
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from ninja_jwt.tokens import RefreshToken
-from .schemas import RegisterSchema, LoginSchema, TokenSchema, ErrorSchema
+from .schemas import RegisterSchema, LoginSchema, TokenSchema
 
 api = NinjaAPI(version='1.0.0')
 
