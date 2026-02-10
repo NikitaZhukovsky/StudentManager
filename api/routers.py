@@ -1,8 +1,8 @@
 from ninja import NinjaAPI
 from users.views import auth_router
-from students.views import student_router
-from courses.views import course_router
-
+from students.router import student_router
+from courses.router import course_router
+from assignments.router import assignment_router
 
 api = NinjaAPI(
     version='1.0.0',
@@ -11,6 +11,9 @@ api = NinjaAPI(
 api.add_router("/users/", auth_router, tags=["Users"])
 api.add_router("/students", student_router, tags=["Students"])
 api.add_router("/course", course_router, tags=["Courses"])
+api.add_router("/assignments", assignment_router, tags=["Assignments"])
+
+
 
 
 

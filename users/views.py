@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from ninja.errors import HttpError
 from ninja_jwt.tokens import RefreshToken
 from .schemas import RegisterSchema, LoginSchema, TokenSchema
@@ -9,7 +10,7 @@ from ninja import Router
 auth_router = Router()
 
 
-@auth_router.post("/register", response={200: TokenSchema})
+@auth_router.post(f"/register", response=TokenSchema)
 def register(request, data: RegisterSchema):
     if User.objects.filter(email=data.email).exists():
         raise HttpError(400, f"Пользователь с таким email уже существует")
@@ -29,7 +30,7 @@ def register(request, data: RegisterSchema):
 @auth_router.post("/login")
 def login(request, data: LoginSchema):
     try:
-        user_obj = User.objects.get(email=data.email)
+        user_obj = get_object_or_404(User, email=data.email)
 
         user = authenticate(username=user_obj.username, password=data.password)
     except Exception as e:
