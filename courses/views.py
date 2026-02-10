@@ -12,7 +12,8 @@ from .schemas import (
     CourseUpdateSchema,
     CourseGetSchema,
     CourseFilterSchema,
-    AddStudentsToCourseSchema
+    AddStudentsToCourseSchema,
+    RemoveStudentsFromCourseSchema
 )
 
 course_router = Router(auth=JWTAuth())
@@ -60,12 +61,13 @@ def create_course(request, data: CourseCreateSchema):
 
 @course_router.get("/{course_id}/", response=CourseGetSchema)
 def get_course(request, course_id: int):
-
     course = get_object_or_404(Course.objects.prefetch_related('students'), id=course_id)
+
     return {
         "id": course.id,
         "title": course.title,
         "code": course.code,
+        "students": list(course.students.values('id', 'full_name', 'email'))
     }
 
 
@@ -98,12 +100,9 @@ def delete_course(request, course_id: int):
     course = get_object_or_404(Course, id=course_id)
     course_title = course.title
 
-    course.students.clear()
-
     course.delete()
 
     return {
-        "success": True,
         "message": f"Курс '{course_title}' удален"
     }
 
@@ -118,8 +117,7 @@ def add_students_to_course(request, course_id: int, data: AddStudentsToCourseSch
 
     if not_found_ids:
         raise HttpError(
-            404,
-            f"Students with IDs {list(not_found_ids)} not found"
+            404, f"Студенты с ID {list(not_found_ids)} не найдены"
         )
 
     if existing_ids:
@@ -136,15 +134,23 @@ def add_students_to_course(request, course_id: int, data: AddStudentsToCourseSch
 
 
 @course_router.delete("/{course_id}/students/", response=CourseGetSchema)
-def remove_students_from_course(request, course_id: int, student_ids: List[int]):
+def remove_students_from_course(
+        request,
+        course_id: int,
+        data: RemoveStudentsFromCourseSchema
+):
     course = get_object_or_404(Course.objects.prefetch_related('students'), id=course_id)
 
     current_student_ids = set(course.students.values_list('id', flat=True))
-    requested_to_remove_ids = set(student_ids)
+    requested_to_remove_ids = set(data.student_ids)
 
     to_remove_ids = current_student_ids.intersection(requested_to_remove_ids)
-
     not_enrolled_ids = requested_to_remove_ids - current_student_ids
+
+    if not to_remove_ids:
+        if not_enrolled_ids:
+            raise HttpError(400, f"Студенты с ID {list(not_enrolled_ids)} не записаны на этот курс")
+        raise HttpError(400, "Нет студентов для удаления")
 
     if to_remove_ids:
         course.students.remove(*to_remove_ids)
@@ -156,6 +162,11 @@ def remove_students_from_course(request, course_id: int, student_ids: List[int])
         "title": course.title,
         "code": course.code,
         "students": list(course.students.values('id', 'full_name', 'email')),
+        "removed_students": list(to_remove_ids),
         "removed_count": len(to_remove_ids)
     }
+
+    if not_enrolled_ids:
+        raise HttpError(400, f"Студенты с ID {list(not_enrolled_ids)} не были записаны на курс" )
     return response_data
+

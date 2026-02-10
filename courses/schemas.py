@@ -1,18 +1,13 @@
 from ninja import Schema
 from typing import Optional, List
-
-
-class StudentSimpleSchema(Schema):
-    id: int
-    full_name: str
-    email: str
+from students.schemas import StudentGetSchema
 
 
 class CourseGetSchema(Schema):
     id: int
     title: str
     code: str
-    students: List[StudentSimpleSchema] = []  # Добавляем обратно
+    students: List[StudentGetSchema] = []
 
 
 class CourseCreateSchema(Schema):
@@ -32,5 +27,9 @@ class CourseFilterSchema(Schema):
 
 
 class AddStudentsToCourseSchema(Schema):
+    student_ids: List[int]
+
+
+class RemoveStudentsFromCourseSchema(Schema):
     student_ids: List[int]
 
