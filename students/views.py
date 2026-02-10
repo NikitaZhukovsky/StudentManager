@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from ninja_jwt.authentication import JWTAuth
 from django.db.models import Q
 from typing import List
-from .models import Students
+from .models import Student
 from .schemas import (
     StudentCreateSchema,
     StudentUpdateSchema,
@@ -21,7 +21,7 @@ def list_students(
         request,
         filters: StudentFilterSchema = Query(...)
 ):
-    queryset = Students.objects.all()
+    queryset = Student.objects.all()
 
     if filters.search:
         queryset = queryset.filter(
@@ -40,7 +40,7 @@ def list_students(
 
 @student_router.post("/", response=StudentGetSchema)
 def create_student(request, data: StudentCreateSchema):
-    student = Students.objects.create(
+    student = Student.objects.create(
         full_name=data.full_name,
         email=data.email
     )
@@ -53,7 +53,7 @@ def create_student(request, data: StudentCreateSchema):
 
 @student_router.get("/{student_id}/", response=StudentGetSchema)
 def get_student(request, student_id: int):
-    student = get_object_or_404(Students, id=student_id)
+    student = get_object_or_404(Student, id=student_id)
     return {
         "id": student.id,
         "full_name": student.full_name,
@@ -64,7 +64,7 @@ def get_student(request, student_id: int):
 @student_router.patch("/{student_id}/", response=StudentGetSchema)
 def update_student(request, student_id: int, data: StudentUpdateSchema):
 
-    student = get_object_or_404(Students, id=student_id)
+    student = get_object_or_404(Student, id=student_id)
 
     if data.full_name is not None:
         student.full_name = data.full_name
@@ -82,7 +82,7 @@ def update_student(request, student_id: int, data: StudentUpdateSchema):
 
 @student_router.delete("/{student_id}/")
 def delete_student(request, student_id: int):
-    student = get_object_or_404(Students, id=student_id)
+    student = get_object_or_404(Student, id=student_id)
     student.delete()
 
     return {"success": True, "message": "Студент удален"}

@@ -23,7 +23,8 @@ INSTALLED_APPS = [
     'ninja',
     'ninja_jwt',
     'users',
-    'students'
+    'students',
+    'courses'
 ]
 
 MIDDLEWARE = [

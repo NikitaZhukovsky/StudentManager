@@ -8,15 +8,17 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('students', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Student',
+            name='Course',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('full_name', models.CharField(max_length=255)),
-                ('email', models.EmailField(max_length=254, unique=True)),
+                ('title', models.CharField(max_length=255)),
+                ('code', models.CharField(max_length=50, unique=True)),
+                ('students', models.ManyToManyField(to='students.student')),
             ],
         ),
     ]
