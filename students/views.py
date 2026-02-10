@@ -85,4 +85,4 @@ def delete_student(request, student_id: int):
     student = get_object_or_404(Student, id=student_id)
     student.delete()
 
-    return {"success": True, "message": "Студент удален"}
+    return {"message": "Студент удален"}
