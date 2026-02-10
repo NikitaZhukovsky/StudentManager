@@ -1,13 +1,14 @@
-from ninja import NinjaAPI
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from ninja_jwt.tokens import RefreshToken
 from .schemas import RegisterSchema, LoginSchema, TokenSchema
+from ninja import Router
 
-api = NinjaAPI(version='1.0.0')
+
+auth_router = Router()
 
 
-@api.post("/register", response={200: TokenSchema})
+@auth_router.post("/register", response={200: TokenSchema})
 def register(request, data: RegisterSchema):
     if User.objects.filter(email=data.email).exists():
         return 400, {"detail": "Пользователь с таким email уже существует"}
@@ -24,14 +25,13 @@ def register(request, data: RegisterSchema):
                  "refresh": str(refresh)}
 
 
-@api.post("/login")
+@auth_router.post("/login")
 def login(request, data: LoginSchema):
     try:
         user_obj = User.objects.get(email=data.email)
 
         user = authenticate(username=user_obj.username, password=data.password)
     except Exception as e:
-        user = None
         raise f'Ошибка: {e}'
 
     if not user:

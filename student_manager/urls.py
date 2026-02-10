@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from users.views import api
+from api.routers import api
 
 
 urlpatterns = [
