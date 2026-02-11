@@ -1,8 +1,5 @@
 from ninja import Query
 from ninja.pagination import paginate, PageNumberPagination
-from django.db.models import Q
-from datetime import date
-from typing import List
 from submissions.models import Submission
 from submissions.schemas import SubmissionGetSchema, SubmissionFilterSchema
 

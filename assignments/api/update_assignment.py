@@ -18,7 +18,7 @@ def update_assignment(request, assignment_id: int, data: AssignmentUpdateSchema)
     if data.description is not None:
         assignment.description = data.description
 
-    if data.course_id is not None and data.course_id != assignment.course_id:
+    if data.course_id is not None:
         course = get_object_or_404(Course, id=data.course_id)
         assignment.course = course
 
