@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "student-manager"
+version = "0.1.0"
+description = ""
+authors = ["NikitaZhukovsky <nikzuk2004@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12"
+psycopg2-binary = "^2.9.11"
+django = "^6.0.2"
+django-ninja = "^1.5.3"
+python-dotenv = "^1.2.1"
+django-ninja-jwt = "^5.4.4"
+pydantic = {extras = ["email"], version = "^2.12.5"}
+django-cors-headers = "^4.9.0"
+celery = "^5.6.2"
+redis = "^7.1.1"
+eventlet = "^0.40.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

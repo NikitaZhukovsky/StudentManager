@@ -1,0 +1,64 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "full_name": "Мария Иванова",
+      "email": "maria@university.edu"
+    },
+    {
+      "id": 2,
+      "full_name": "Алексей Кузнецов",
+      "email": "alex@university.edu"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "Веб-разработка на Python",
+      "code": "CS301"
+    },
+    {
+      "id": 2,
+      "title": "Базы данных",
+      "code": "CS205"
+    }
+  ],
+  "course_enrollments": [
+    { "student_id": 1, "course_id": 1 },
+    { "student_id": 1, "course_id": 2 },
+    { "student_id": 2, "course_id": 1 }
+  ],
+  "assignments": [
+    {
+      "id": 1,
+      "title": "Создать REST API на Django",
+      "description": "Реализуйте CRUD для модели Book",
+      "course_id": 1,
+      "due_date": "2026-02-10"
+    },
+    {
+      "id": 2,
+      "title": "SQL-запросы",
+      "description": "Написать 10 запросов",
+      "course_id": 2,
+      "due_date": "2026-02-05"
+    }
+  ],
+  "submissions": [
+    {
+      "id": 1,
+      "student_id": 1,
+      "assignment_id": 1,
+      "file_path": "submissions/maria_django_api.zip",
+      "submitted_at": "2026-01-25T14:30:00Z"
+    },
+    {
+      "id": 2,
+      "student_id": 2,
+      "assignment_id": 1,
+      "file_path": "submissions/alex_django_api.zip",
+      "submitted_at": "2026-01-26T10:15:00Z"
+    }
+  ]
+}
+
