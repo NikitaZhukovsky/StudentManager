@@ -11,7 +11,7 @@ def update_course(request, course_id: int, data: CourseUpdateSchema):
     if data.title is not None:
         course.title = data.title
 
-    if data.code is not None and data.code != course.code:
+    if data.code is not None:
         if Course.objects.filter(code=data.code).exclude(id=course_id).exists():
             raise HttpError(400, f"Курс '{data.code}' уже существует")
         course.code = data.code

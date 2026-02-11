@@ -16,8 +16,8 @@ class CourseCreateSchema(Schema):
 
 
 class CourseUpdateSchema(Schema):
-    title: Optional[str]
-    code: Optional[str]
+    title: Optional[str] = None
+    code: Optional[str] = None
 
 
 class CourseFilterSchema(Schema):
