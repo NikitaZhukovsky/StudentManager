@@ -29,8 +29,6 @@ def list_submissions(
         queryset = queryset.filter(submitted_at__lte=filters.to_date)
 
     order_field = filters.order_by
-    if filters.order.lower() == "desc":
-        order_field = f"-{order_field}"
 
     queryset = queryset.order_by(order_field)
 

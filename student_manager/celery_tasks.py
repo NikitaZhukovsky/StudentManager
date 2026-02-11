@@ -23,7 +23,7 @@ def update_daily_data():
     try:
         with transaction.atomic():
 
-            for student in data.get("students", []):
+            for student in data.get("students"):
                 Student.objects.update_or_create(
                     id=student["id"],
                     defaults={
@@ -32,7 +32,7 @@ def update_daily_data():
                     }
                 )
 
-            for course in data.get("courses", []):
+            for course in data.get("courses"):
                 Course.objects.update_or_create(
                     id=course["id"],
                     defaults={
@@ -41,12 +41,12 @@ def update_daily_data():
                     }
                 )
 
-            for enroll in data.get("course_enrollments", []):
+            for enroll in data.get("course_enrollments"):
                 student = Student.objects.get(id=enroll["student_id"])
                 course = Course.objects.get(id=enroll["course_id"])
                 course.students.add(student)
 
-            for assignment in data.get("assignments", []):
+            for assignment in data.get("assignments"):
                 course = Course.objects.get(id=assignment["course_id"])
                 Assignment.objects.update_or_create(
                     id=assignment["id"],
@@ -58,7 +58,7 @@ def update_daily_data():
                     }
                 )
 
-            for submission in data.get("submissions", []):
+            for submission in data.get("submissions"):
                 student = Student.objects.get(id=submission["student_id"])
                 assignment = Assignment.objects.get(id=submission["assignment_id"])
 

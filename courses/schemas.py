@@ -23,7 +23,6 @@ class CourseUpdateSchema(Schema):
 class CourseFilterSchema(Schema):
     search: Optional[str] = None
     order_by: str = "id"
-    order: str = "asc"
 
 
 class AddStudentsToCourseSchema(Schema):

@@ -31,5 +31,4 @@ class AssignmentFilterSchema(Schema):
     course_id: Optional[int] = None
     upcoming: Optional[bool] = None
     order_by: str = "id"
-    order: str = "asc"
 

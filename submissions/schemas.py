@@ -35,5 +35,4 @@ class SubmissionFilterSchema(Schema):
     from_date: Optional[date] = None
     to_date: Optional[date] = None
     order_by: str = "id"
-    order: str = "asc"
 

@@ -9,10 +9,10 @@ class RegisterSchema(Schema):
     password_confirm: str
 
     @field_validator('password_confirm')
-    def passwords_mathc(cls, v, info):
-        if 'password' in info.data and v != info.data['password']:
+    def passwords_mathc(cls, value, info):
+        if 'password' in info.data and value != info.data['password']:
             raise ValueError('Пароли не совпадают')
-        return v
+        return value
 
 
 class LoginSchema(Schema):

@@ -22,5 +22,5 @@ class StudentGetSchema(Schema):
 class StudentFilterSchema(Schema):
     search: Optional[str] = None
     order_by: Optional[str] = "id"
-    order: Optional[str] = "asc"
+
 

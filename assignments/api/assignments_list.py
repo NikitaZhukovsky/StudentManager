@@ -26,8 +26,6 @@ def list_assignments(
         queryset = queryset.filter(due_date__gte=date.today())
 
     order_field = filters.order_by
-    if filters.order.lower() == "desc":
-        order_field = f"-{order_field}"
 
     queryset = queryset.order_by(order_field)
 

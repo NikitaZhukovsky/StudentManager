@@ -9,6 +9,11 @@
       "id": 2,
       "full_name": "Алексей Кузнецов",
       "email": "alex@university.edu"
+    },
+    {
+      "id": 3,
+      "full_name": "Никита Жуковский",
+      "email": "nikita@university.edu"
     }
   ],
   "courses": [
@@ -21,12 +26,18 @@
       "id": 2,
       "title": "Базы данных",
       "code": "CS205"
+    },
+    {
+      "id": 3,
+      "title": "Базы данных",
+      "code": "CS207"
     }
   ],
   "course_enrollments": [
     { "student_id": 1, "course_id": 1 },
     { "student_id": 1, "course_id": 2 },
-    { "student_id": 2, "course_id": 1 }
+    { "student_id": 2, "course_id": 1 },
+    { "student_id": 3, "course_id": 3 }
   ],
   "assignments": [
     {
@@ -40,6 +51,13 @@
       "id": 2,
       "title": "SQL-запросы",
       "description": "Написать 10 запросов",
+      "course_id": 2,
+      "due_date": "2026-02-05"
+    },
+    {
+      "id": 3,
+      "title": "SQL-запросы",
+      "description": "Написать 20 запросов",
       "course_id": 2,
       "due_date": "2026-02-05"
     }
@@ -56,6 +74,13 @@
       "id": 2,
       "student_id": 2,
       "assignment_id": 1,
+      "file_path": "submissions/alex_django_api.zip",
+      "submitted_at": "2026-01-26T10:15:00Z"
+    },
+    {
+      "id": 3,
+      "student_id": 3,
+      "assignment_id": 3,
       "file_path": "submissions/alex_django_api.zip",
       "submitted_at": "2026-01-26T10:15:00Z"
     }
