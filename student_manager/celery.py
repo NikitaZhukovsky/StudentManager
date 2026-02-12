@@ -11,7 +11,7 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    "update-data-every-2-min": {
+    "daily-update-data-at-6": {
         "task": "student_manager.celery_tasks.update_daily_data",
         "schedule": crontab(hour=6, minute=0),
         "args": (),

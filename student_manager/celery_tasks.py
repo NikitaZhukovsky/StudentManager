@@ -1,7 +1,7 @@
-from celery import shared_task
 import json
 import os
 from django.db import transaction
+from celery import shared_task
 
 
 @shared_task

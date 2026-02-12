@@ -29,6 +29,5 @@ class AssignmentUpdateSchema(Schema):
 class AssignmentFilterSchema(Schema):
     search: Optional[str] = None
     course_id: Optional[int] = None
-    upcoming: Optional[bool] = None
     order_by: str = "id"
 
