@@ -1,7 +1,6 @@
 from ninja import Query
 from ninja.pagination import paginate, PageNumberPagination
 from django.db.models import Q
-from datetime import date
 from assignments.models import Assignment
 from assignments.schemas import AssignmentGetSchema, AssignmentFilterSchema
 
@@ -22,12 +21,7 @@ def list_assignments(
     if filters.course_id:
         queryset = queryset.filter(course_id=filters.course_id)
 
-    if filters.upcoming:
-        queryset = queryset.filter(due_date__gte=date.today())
-
     order_field = filters.order_by
-    if filters.order.lower() == "desc":
-        order_field = f"-{order_field}"
 
     queryset = queryset.order_by(order_field)
 
