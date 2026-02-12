@@ -13,7 +13,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     "update-data-every-2-min": {
         "task": "student_manager.celery_tasks.update_daily_data",
-        "schedule": crontab(minute="*/2"),
+        "schedule": crontab(hour=6, minute=0),
         "args": (),
     },
 }
