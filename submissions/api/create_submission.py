@@ -16,8 +16,7 @@ def create_submission(request, data: SubmissionCreateSchema):
 
     submission = Submission.objects.create(
         student=student,
-
-      assignment=assignment,
+        assignment=assignment,
         file_path=data.file_path,
         submitted_at=data.submitted_at
     )
