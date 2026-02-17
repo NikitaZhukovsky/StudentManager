@@ -8,3 +8,4 @@ def delete_assignment(request, assignment_id: int):
     assignment.delete()
 
     return {"message": f"Задание '{assignment_title}' удалено"}
+

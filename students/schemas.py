@@ -23,4 +23,3 @@ class StudentFilterSchema(Schema):
     search: Optional[str] = None
     order_by: Optional[str] = "id"
 
-

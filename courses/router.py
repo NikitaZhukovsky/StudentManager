@@ -19,7 +19,6 @@ from courses.schemas import (
 
 course_router = Router(auth=JWTAuth())
 
-# Регистрируем эндпоинты
 course_router.get("/", response=List[CourseGetSchema])(list_courses)
 course_router.post("/", response=CourseGetSchema)(create_course)
 course_router.get("/{course_id}/", response=CourseGetSchema)(get_course)

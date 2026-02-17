@@ -21,4 +21,3 @@ student_router.get("/{student_id}/", response=StudentGetSchema)(get_student)
 student_router.patch("/{student_id}/", response=StudentGetSchema)(update_student)
 student_router.delete("/{student_id}/")(delete_student)
 
-
